@@ -1,0 +1,23 @@
+{
+  "name": "vidly",
+  "version": "1.0.0",
+  "description": "Testing Backend Vidly NodeJS course by Mosh",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohamedWSalah/Test-Vidly-Backend-NodeJS.git"
+  },
+  "author": "MohamedSalah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MohamedWSalah/Test-Vidly-Backend-NodeJS/issues"
+  },
+  "homepage": "https://github.com/MohamedWSalah/Test-Vidly-Backend-NodeJS#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^14.3.1"
+  }
+}
