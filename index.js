@@ -2,13 +2,13 @@ const Express = require('express');
 const App = Express();
 const Genres = require('./Routes/Genres');
 const Customers = require('./Routes/Customers');
-const Logger = require('./Middleware/Logger');
+//const Logger = require('./Middleware/Logger');
 const config = require('config');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
 
-App.use(Logger);
+//App.use(Logger);
 App.use(Express.json());
 App.use(Express.urlencoded({ extended: true}));
 App.use(morgan('tiny'));

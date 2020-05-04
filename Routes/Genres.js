@@ -2,13 +2,7 @@ const Express = require('express');
 const Router = Express.Router();
 const Joi = require('joi');
 const mongoose = require('mongoose');
-
-const genreSchema = new mongoose.Schema(
-{
-    name: {type: String , require:true , minlength:5 , maxlength: 50}
-});
-
-const Genre = mongoose.model('Genre',genreSchema);
+const {Genre,validateJOI} = require('../Models/Genre');
 
 //GET
 Router.get('/',async (req,res) =>
@@ -53,8 +47,6 @@ Router.put('/:id',async(req,res) =>
     
     if(!genre) return res.status(404).send("Genre ID  was not found");
     
-   
-    
     res.send(genre);
 });
 //Done^
@@ -66,15 +58,6 @@ Router.delete('/:id',async(req,res) =>
     res.send(Deleted);
 });
 
-function validateJOI(X)
-{
-    const schema =
-    {
-        name: Joi.string().min(5).max(10).required()
-    };
 
-    return Joi.validate(X, schema);
-}
-//Done^
 
 module.exports = Router;
