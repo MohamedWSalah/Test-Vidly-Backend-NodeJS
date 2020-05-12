@@ -2,6 +2,7 @@ const Express = require('express');
 const App = Express();
 const Genres = require('./Routes/Genres');
 const Customers = require('./Routes/Customers');
+const Movies = require('./Routes/Movies');
 //const Logger = require('./Middleware/Logger');
 const config = require('config');
 const morgan = require('morgan');
@@ -14,6 +15,9 @@ App.use(Express.urlencoded({ extended: true}));
 App.use(morgan('tiny'));
 App.use('/api/genres' , Genres);
 App.use('/api/customers', Customers);
+
+App.use('/api/movies', Movies);
+
 
 console.log("Application name :" + config.get('name'));
 mongoose.connect('mongodb://localhost/vidly',{ useNewUrlParser: true, useUnifiedTopology:true })
