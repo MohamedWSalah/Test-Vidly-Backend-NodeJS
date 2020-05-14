@@ -2,10 +2,12 @@ const Express = require('express');
 const Router = Express.Router();
 const Joi = require('joi');
 const mongoose = require('mongoose');
+const Fawn = require('fawn');
 const {Customer,Validate} = require('../Models/Customer');
 const {Movies,MovieValidation}= require('../Models/Movie');
 const {Rental, rentalValidation} = require('../Models/Rental');
 
+Fawn.init(mongoose);
 
 Router.get('/', async(req,res) =>
 {
@@ -32,14 +34,23 @@ Router.post('/', async(req,res)=>
         }
     );
 
+    try 
+    {
+        new Fawn.Task()
+        .save('rentals',NewRental)
+        .update('movies', {_id:movie._id}, 
+        {
+            $inc: {numberInStock: -1}
+        })
+        .run();
 
-    NewRental = await NewRental.save();
-
-    movie.numberInStock--;
-    movie.save();
-
-    res.send(NewRental);
-    console.log(NewRental);
+        res.send(NewRental);
+        console.log(NewRental);
+    } 
+    catch (error) 
+    {
+        res.status(500).send('Server Error');
+    }
 })
 
 
