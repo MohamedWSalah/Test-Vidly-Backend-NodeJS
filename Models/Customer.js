@@ -25,4 +25,5 @@ function CustomerValidation(X)
 }
 
 module.exports.Customer = Customer;
+module.exports.customerSchema = customerSchema;
 module.exports.Validate = CustomerValidation;
