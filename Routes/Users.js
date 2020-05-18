@@ -26,8 +26,6 @@ Router.post('/', async(req,res)=>
     await NewUser.save();
 
     res.send(NewUser);
-
-    console.log(`${NewUser} has been added.`);
 })
 
 
