@@ -1,3 +1,5 @@
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const Express = require('express');
 const App = Express();
 const Genres = require('./Routes/Genres');

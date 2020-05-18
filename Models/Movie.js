@@ -21,7 +21,7 @@ function MovieValidation(movie)
     const Schema = 
     {
         title: Joi.string().min(3).max(50).required(),
-        genreId: Joi.string().required(),
+        genreId: Joi.objectId().required(),
         numberInStock: Joi.number().min(0),
         dailyRentalRate: Joi.number().min(0),
     }

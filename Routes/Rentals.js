@@ -21,6 +21,8 @@ Router.post('/', async(req,res)=>
     const {error} = rentalValidation(req.body);
     if(error) return res.status(404).send(error.details[0].message);
 
+    
+
     const customer = await Customer.findById(req.body.customerId);
     if(!customer) return res.status(404).send('Customer ID is invalid');
 

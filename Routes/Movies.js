@@ -22,14 +22,14 @@ Router.post('/',async (req,res) =>
     const genre = await Genre.findById(req.body.genreId);
     if(!genre) return res.status(400).send('Wrong Genre');
     
-    let movie = new Movies
+    const movie = new Movies
     (
         {
             title:req.body.title,
             genre: {_id: genre._id , name: genre.name}
         }
     );
-    movie = await movie.save();
+    await movie.save();
 
     res.send(movie);
     console.log(`${movie.title} was added to the Movies`);

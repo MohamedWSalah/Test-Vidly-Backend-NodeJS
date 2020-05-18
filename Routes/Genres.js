@@ -27,10 +27,10 @@ Router.get('/:id',async (req,res) =>
 //POST
 Router.post('/',async (req,res) =>
 {
-    let RecvM = new Genre ({name: req.body.name});
+    const RecvM = new Genre ({name: req.body.name});
     const {error} = validateJOI(req.body);
-   if(error) return res.send(error.details[0].message);
-    RecvM = await RecvM.save();
+    if(error) return res.send(error.details[0].message);
+    await RecvM.save();
     res.send(RecvM);
     console.log(`${RecvM.name} was added to the Genres`);
 });

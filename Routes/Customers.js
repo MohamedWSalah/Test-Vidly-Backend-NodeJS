@@ -30,13 +30,13 @@ Router.post('/',async (req,res)=>
     const {error} = Validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
-    let C = new Customer(
+    const C = new Customer(
         {name: req.body.name,
         phone:req.body.phone,
         isGold:req.body.isGold});
     
 
-    C = await C.save();
+    await C.save();
     res.send(C);
 });
 
