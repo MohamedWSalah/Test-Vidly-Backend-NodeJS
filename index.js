@@ -15,18 +15,18 @@ const mongoose = require('mongoose');
 
 //App.use(Logger);
 App.use(Express.json());
-App.use(Express.urlencoded({ extended: true}));
+App.use(Express.urlencoded({ extended: true }));
 App.use(morgan('tiny'));
-App.use('/api/genres' , Genres);
+App.use('/api/genres', Genres);
 App.use('/api/customers', Customers);
 App.use('/api/movies', Movies);
 App.use('/api/rentals', Rentals);
 App.use('/api/users', Users);
 
 console.log("Application name :" + config.get('name'));
-mongoose.connect('mongodb://localhost/vidly',{ useNewUrlParser: true, useUnifiedTopology:true })
-.then(()=> console.log('Connected to Vidly DB'))
-.catch(err => console.log(err.message));
+mongoose.connect('mongodb://localhost/vidly', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to Vidly DB'))
+    .catch(err => console.log(err.message));
 
 App.listen(3000);
 console.log("Listening on port 3000....");
