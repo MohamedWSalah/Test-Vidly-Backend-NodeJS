@@ -6,18 +6,24 @@ const Fawn = require('fawn');
 const {User} = require('../Models/User');
 const lodash = require('lodash');
 const bcrypt = require('bcrypt');
+const JWT = require('jsonwebtoken');
+const config = require('config');
 
 Router.post('/', async (req, res) => {
     const { error } = AuthValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    let NewUser = await User.findOne({ email: req.body.email });
-    if (!NewUser) return res.status(400).send('Invalid Email or Password..');
+    let UserLoging = await User.findOne({ email: req.body.email });
+    if (!UserLoging) return res.status(400).send('Invalid Email or Password..');
 
-    const validPassword = await bcrypt.compare(req.body.password, NewUser.password);
+    const validPassword = await bcrypt.compare(req.body.password, UserLoging.password);
     if (!validPassword) return res.status(400).send('Invalid Email or Password.');
 
-    res.send(true);
+
+    const Token = UserLoging.generateAuthToken();
+
+    
+    res.send(Token);
 
 })
 

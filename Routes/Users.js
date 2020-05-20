@@ -6,6 +6,8 @@ const Fawn = require('fawn');
 const { User, UserValidation } = require('../Models/User');
 const lodash = require('lodash');
 const bcrypt = require('bcrypt');
+const JWT = require('jsonwebtoken');
+const config = require('config');
 
 Router.post('/', async (req, res) => {
     const { error } = UserValidation(req.body);
@@ -30,8 +32,9 @@ Router.post('/', async (req, res) => {
 
     await NewUser.save();
 
+    const Token = JWT.sign({_id:NewUser._id}, config.get('jwtPrivateKey'));
 
-    res.send(lodash.pick(NewUser, ['name', 'email']));
+    res.header('x-auth-token', Token).send(lodash.pick(NewUser, ['name', 'email']));
 })
 
 

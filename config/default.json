@@ -1,3 +1,4 @@
 {
-    "name" : "Vidly Backend NODE JS"
+    "name" : "Vidly Backend NODE JS",
+    "jwtPrivateKey":""
 }
