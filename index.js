@@ -7,6 +7,7 @@ const Customers = require('./Routes/Customers');
 const Movies = require('./Routes/Movies');
 const Rentals = require('./Routes/Rentals');
 const Users = require('./Routes/Users');
+const Auth = require('./Routes/auth');
 //const Logger = require('./Middleware/Logger');
 const config = require('config');
 const morgan = require('morgan');
@@ -22,7 +23,7 @@ App.use('/api/customers', Customers);
 App.use('/api/movies', Movies);
 App.use('/api/rentals', Rentals);
 App.use('/api/users', Users);
-
+App.use('/api/auth', Auth);
 console.log("Application name :" + config.get('name'));
 mongoose.connect('mongodb://localhost/vidly', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to Vidly DB'))
