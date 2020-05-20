@@ -8,7 +8,7 @@ const Movies = require('./Routes/Movies');
 const Rentals = require('./Routes/Rentals');
 const Users = require('./Routes/Users');
 const Auth = require('./Routes/auth');
-//const Logger = require('./Middleware/Logger');
+const AuthMW = require('./Middleware/auth');
 const config = require('config');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
@@ -20,6 +20,7 @@ if(!config.get('jwtPrivateKey'))
 }
 
 //App.use(Logger);
+App.use(AuthMW);
 App.use(Express.json());
 App.use(Express.urlencoded({ extended: true }));
 App.use(morgan('tiny'));
