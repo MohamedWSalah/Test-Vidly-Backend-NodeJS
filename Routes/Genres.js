@@ -3,6 +3,7 @@ const Router = Express.Router();
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const {Genre,validateJOI} = require('../Models/Genre');
+const auth = require('../Middleware/auth');
 
 //GET
 Router.get('/',async (req,res) =>
@@ -25,7 +26,7 @@ Router.get('/:id',async (req,res) =>
 });
 //============
 //POST
-Router.post('/',async (req,res) =>
+Router.post('/',auth,async (req,res) =>
 {
     const RecvM = new Genre ({name: req.body.name});
     const {error} = validateJOI(req.body);
@@ -37,7 +38,7 @@ Router.post('/',async (req,res) =>
 //Done^
 //===============
 //PUT
-Router.put('/:id',async(req,res) =>
+Router.put('/:id',auth,async(req,res) =>
 {   
     const {error} = validateJOI(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -51,7 +52,7 @@ Router.put('/:id',async(req,res) =>
 });
 //Done^
 //Delete
-Router.delete('/:id',async(req,res) =>
+Router.delete('/:id',auth,async(req,res) =>
 {
     const Deleted = await Genre.findByIdAndRemove(req.params.id);
     if(!Deleted) return res.status(404).send("Genre ID  was not found");

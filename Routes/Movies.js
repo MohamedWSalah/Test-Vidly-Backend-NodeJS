@@ -4,6 +4,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 const { Movies, MovieValidation } = require('../Models/Movie');
 const { Genre } = require('../Models/Genre');
+const auth = require('../Middleware/auth');
 
 Router.get('/', async (req, res) => {
     const movies = await Movies.find();
@@ -13,7 +14,7 @@ Router.get('/', async (req, res) => {
 });
 
 
-Router.post('/', async (req, res) => {
+Router.post('/',auth, async (req, res) => {
     const { error } = MovieValidation(req.body);
     if (error) return res.send(error.details[0].message);
 

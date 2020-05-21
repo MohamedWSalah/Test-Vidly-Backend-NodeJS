@@ -3,9 +3,10 @@ const Router = Express.Router();
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const Fawn = require('fawn');
-const {Customer,Validate} = require('../Models/Customer');
-const {Movies,MovieValidation}= require('../Models/Movie');
+const {Customer} = require('../Models/Customer');
+const {Movies}= require('../Models/Movie');
 const {Rental, rentalValidation} = require('../Models/Rental');
+const auth = require('../Middleware/auth');
 
 Fawn.init(mongoose);
 
@@ -16,7 +17,7 @@ Router.get('/', async(req,res) =>
     console.log('rentals list was sent to the client');
 });
 
-Router.post('/', async(req,res)=>
+Router.post('/',auth, async(req,res)=>
 {
     const {error} = rentalValidation(req.body);
     if(error) return res.status(404).send(error.details[0].message);

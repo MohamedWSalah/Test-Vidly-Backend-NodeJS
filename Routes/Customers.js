@@ -3,7 +3,7 @@ const Router = Express.Router();
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const {Customer,Validate} = require('../Models/Customer');
-
+const auth = require('../Middleware/auth');
 
 //Get all customers API
 Router.get('/',async (req,res)=>
@@ -25,7 +25,7 @@ Router.get('/:id',async (req,res) =>
 });
 
 //Add Customer to the list
-Router.post('/',async (req,res)=>
+Router.post('/',auth,async (req,res)=>
 {
     const {error} = Validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -41,7 +41,7 @@ Router.post('/',async (req,res)=>
 });
 
 //Update Customer
-Router.put('/:id',async(req,res) =>
+Router.put('/:id',auth,async(req,res) =>
 {   
     const {error} = Validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
