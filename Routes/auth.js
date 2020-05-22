@@ -1,14 +1,9 @@
 const Express = require('express');
 const Router = Express.Router();
 const Joi = require('joi');
-const mongoose = require('mongoose');
-const Fawn = require('fawn');
 const {User} = require('../Models/User');
-const lodash = require('lodash');
-const bcrypt = require('bcrypt');
-const JWT = require('jsonwebtoken');
-const config = require('config');
 
+const bcrypt = require('bcrypt');
 Router.post('/', async (req, res) => {
     const { error } = AuthValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);

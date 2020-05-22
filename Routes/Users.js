@@ -8,6 +8,16 @@ const lodash = require('lodash');
 const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
 const config = require('config');
+const auth = require('../Middleware/auth');
+
+
+Router.get('/me',auth ,async (req,res)=>
+{
+    
+    const CurrentUser = await User.findById(req.user._id);
+    
+    res.send(CurrentUser);
+});
 
 Router.post('/', async (req, res) => {
     const { error } = UserValidation(req.body);
@@ -32,7 +42,7 @@ Router.post('/', async (req, res) => {
 
     await NewUser.save();
 
-    const Token = JWT.sign({_id:NewUser._id}, config.get('jwtPrivateKey'));
+    const Token = NewUser.generateAuthToken();
 
     res.header('x-auth-token', Token).send(lodash.pick(NewUser, ['name', 'email']));
 })

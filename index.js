@@ -19,8 +19,8 @@ if(!config.get('jwtPrivateKey'))
     process.exit(1);
 }
 
-//App.use(Logger);
-App.use(AuthMW);
+
+
 App.use(Express.json());
 App.use(Express.urlencoded({ extended: true }));
 App.use(morgan('tiny'));

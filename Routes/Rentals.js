@@ -7,6 +7,7 @@ const {Customer} = require('../Models/Customer');
 const {Movies}= require('../Models/Movie');
 const {Rental, rentalValidation} = require('../Models/Rental');
 const auth = require('../Middleware/auth');
+const lodash = require('lodash');
 
 Fawn.init(mongoose);
 
@@ -47,7 +48,7 @@ Router.post('/',auth, async(req,res)=>
         })
         .run();
 
-        res.send(NewRental);
+        res.send(lodash.pick(NewRental, ['customer.name', 'movie.title','movie.dailyRentalRate']));
         console.log(NewRental);
     } 
     catch (error) 
