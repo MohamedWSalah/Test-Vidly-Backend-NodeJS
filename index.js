@@ -31,7 +31,7 @@ App.use('/api/rentals', Rentals);
 App.use('/api/users', Users);
 App.use('/api/auth', Auth);
 console.log("Application name :" + config.get('name'));
-mongoose.connect('mongodb://localhost/vidly', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('moonidly_db', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to Vidly DB'))
     .catch(err => console.log(err.message));
 
