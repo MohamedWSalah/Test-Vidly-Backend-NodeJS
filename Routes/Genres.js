@@ -4,6 +4,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 const {Genre,validateJOI} = require('../Models/Genre');
 const auth = require('../Middleware/auth');
+const AdminAuth = require('../Middleware/admin');
 
 //GET
 Router.get('/',async (req,res) =>
@@ -52,7 +53,7 @@ Router.put('/:id',auth,async(req,res) =>
 });
 //Done^
 //Delete
-Router.delete('/:id',auth,async(req,res) =>
+Router.delete('/:id',[auth,AdminAuth] ,async(req,res) =>
 {
     const Deleted = await Genre.findByIdAndRemove(req.params.id);
     if(!Deleted) return res.status(404).send("Genre ID  was not found");

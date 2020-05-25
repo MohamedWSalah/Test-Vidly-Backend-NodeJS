@@ -14,7 +14,7 @@ const auth = require('../Middleware/auth');
 Router.get('/me',auth ,async (req,res)=>
 {
     
-    const CurrentUser = await User.findById(req.user._id);
+    const CurrentUser = await User.findById(req.user._id).select('-password');
     
     res.send(CurrentUser);
 });
