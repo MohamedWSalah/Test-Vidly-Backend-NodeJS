@@ -31,10 +31,11 @@ App.use('/api/rentals', Rentals);
 App.use('/api/users', Users);
 App.use('/api/auth', Auth);
 console.log("Application name :" + config.get('name'));
-mongoose.connect(config.get('db'), { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/vidly', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to Vidly DB'))
     .catch(err => console.log(err.message));
 
-const port = process.env.port || 3000;
+
+const port = process.env.PORT || config.get('port');
 App.listen(port);
-console.log(`Listening on port 3000....${port}`);
+console.log("Listening on port 3000....");
