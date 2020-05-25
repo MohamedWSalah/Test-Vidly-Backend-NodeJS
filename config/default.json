@@ -1,5 +1,5 @@
 {
     "name" : "Vidly Backend NODE JS",
     "jwtPrivateKey":"",
-    "db": "mongodb://"
+    "db": ""
 }
