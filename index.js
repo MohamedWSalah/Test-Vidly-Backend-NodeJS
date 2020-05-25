@@ -38,4 +38,4 @@ mongoose.connect(config.get('db'), { useNewUrlParser: true, useUnifiedTopology: 
 
 const port = process.env.PORT || config.get('port');
 App.listen(port);
-console.log("Listening on port 3000....");
+console.log(`Listening on port ${port}`);
