@@ -35,5 +35,6 @@ mongoose.connect('mongodb://localhost/vidly', { useNewUrlParser: true, useUnifie
     .then(() => console.log('Connected to Vidly DB'))
     .catch(err => console.log(err.message));
 
-App.listen(3000);
-console.log("Listening on port 3000....");
+const port = process.env.port || 3000;
+App.listen(port);
+console.log(`Listening on port 3000....${port}`);
