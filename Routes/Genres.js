@@ -7,12 +7,10 @@ const auth = require('../Middleware/auth');
 const AdminAuth = require('../Middleware/admin');
 
 //GET
-Router.get('/',async (req,res) =>
+Router.get('/',async (req,res,next) =>
 {
-    const genres = await Genre.find();
-    res.send(genres);
-    console.log("Genres list was sent to the client");
-    console.log(genres);
+        const genres = await Genre.find().sort('name');
+        res.send(genres);
 });
 //DONE ^
 
